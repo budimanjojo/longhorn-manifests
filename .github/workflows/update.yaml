@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
         repository: longhorn/longhorn-manager
         ref: v1.2.2
@@ -28,6 +29,7 @@ jobs:
         title: "[bot] Automated update"
         signoff: false
         committer: Github <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         body: |
           This is an automated update to longhorn manifests from CI.
 
