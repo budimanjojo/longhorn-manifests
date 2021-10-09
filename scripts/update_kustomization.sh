@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-kustomization_files=$(find manifests/*/kustomization.yaml)
+kustomization_1=./manifests/setup/kustomization.yaml
+kustomization_2=./manifests/deploy/kustomization.yaml
 
-for f in $kustomization_files
-do
-    source_dir='dirname $f'
-    rm $f
-    sh -c 'cd $source_dir && kustomize create --autodetect'
-done
+rm $kustomization_1 $kustomization_2
+
+sh -c 'cd manifests/setup && kustomize create --autodetect'
+sh -c 'cd manifests/deploy && kustomize create --autodetect'
