@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-version='$(cat upstream/version)'
+version=$(cat upstream/version)
 echo "current upstream version is $version"
 
 files='find upstream/deploy/install/ | grep yaml'
@@ -9,7 +9,7 @@ ui_image="longhornio\/longhorn-ui"
 engine_image="longhornio\/longhorn-engine"
 
 mkdir -p manifests/setup manifests/deploy
-for f in files
+for f in $files
 do
     sed -i "s/${manager_image}:${master}/${manager_image}:${version}/g"
     sed -i "s/${ui_image}:${master}/${ui_image}:${version}/g"
