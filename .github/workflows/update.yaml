@@ -15,10 +15,10 @@ jobs:
         repository: longhorn/longhorn-manager
         ref: v1.2.2
         path: upstream
-    - run: |
-        #!/usr/bin/env bash
-        # Testing
-        cp -R upstream/deploy .
+    - name: Update image version
+      run: scripts/update_image.sh
+    - name: Update kustomization files
+      run: scripts/update_kustomization.sh
     - name: Cleanup
       run: rm -rf ./upstream
     - name: Create pull request
