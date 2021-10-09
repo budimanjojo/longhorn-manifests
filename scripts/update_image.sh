@@ -2,7 +2,7 @@
 version=$(cat upstream/version)
 echo "current upstream version is $version"
 
-files='find upstream/deploy/install/ | grep yaml | sort'
+files='find upstream/deploy/install/*/*.yaml'
 master="master-head"
 manager_image="longhornio\/longhorn-manager"
 ui_image="longhornio\/longhorn-ui"
