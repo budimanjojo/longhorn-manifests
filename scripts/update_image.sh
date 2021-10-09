@@ -19,4 +19,4 @@ done
 
 # Move crds to their own directory
 mv manifests/deploy/01-namespace.yaml manifests/setup/01-namespace.yaml
-mv manifests/deploy/03-crd.yaml /manifests/setup/02-crds.yaml
+mv manifests/deploy/03-crd.yaml manifests/setup/02-crds.yaml
