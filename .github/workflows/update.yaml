@@ -17,7 +17,7 @@ jobs:
         path: upstream
     - name: Update image version
       run: scripts/update_image.sh
-    - uses: imramail/setup-kustomize@v1
+    - uses: imranismail/setup-kustomize@v1
     - name: Update kustomization files
       run: scripts/update_kustomization.sh
     - name: Cleanup
