@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-kustomization_files='find manifests/*/kustomization.yaml'
+kustomization_files=$(find manifests/*/kustomization.yaml)
 
 for f in $kustomization_files
 do
