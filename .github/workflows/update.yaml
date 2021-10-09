@@ -1,0 +1,35 @@
+name: Update to latest version
+
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: '00 12 * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: longhorn/longhorn-manager
+        ref: v1.2.2
+        path: upstream
+    - run: |
+        #!/usr/bin/env bash
+        # Testing
+        cp -R upstream/deploy .
+    - name: Cleanup
+      run: rm -rf ./upstream
+    - name: Create pull request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        delete-branch: true
+        title: "[bot] Automated update"
+        signoff: false
+        committer: Github <noreply@github.com>
+        body: |
+          This is an automated update to longhorn manifests from CI.
+
+          Configuration of the workflow is located in `.github/workflows/update.yaml`
+        labels: bot/update

@@ -1,0 +1,29 @@
+{
+    "enabled": true,
+    "semanticCommits": "enabled",
+    "labels": ["renovatebot"],
+    "commitBody": "Signed-Off-by: Budiman JOJO <budimanjojo@gmail.com>",
+    "semanticCommitScope": "images",
+    "suppressNotifications": ["prIgnoreNotification"],
+    "rebaseWhen": "conflicted",
+    "automerge": true,
+    "regexManagers": [
+        {
+            "fileMatch": [".github/workflows/update.yaml"],
+            "matchStrings": [
+                "^\\s+repository: (?<depName>.+)\\b\\s+ref: (?<currentValue>v?\\d+.\\d+.\\d+)$"
+            ],
+            "datasourceTemplate": "github-tags"
+        }
+    ],
+    "packageRules": [
+        {
+            "matchUpdateTypes": ["major"],
+            "addLabels": [ "dep/major"]
+        },
+        {
+            "matchUpdateTypes": ["minor", "patch"],
+            "addLabels": [ "dep/minor"]
+        }
+    ]
+}
