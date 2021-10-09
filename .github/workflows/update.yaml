@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
       with:
         repository: longhorn/longhorn-manager
         ref: v1.2.2
         path: upstream
-    - run: |
-        #!/usr/bin/env bash
-        # Testing
-        cp -R upstream/deploy .
+    - name: Update image version
+      run: scripts/update_image.sh
+    - uses: imranismail/setup-kustomize@v1
+    - name: Update kustomization files
+      run: scripts/update_kustomization.sh
     - name: Cleanup
       run: rm -rf ./upstream
     - name: Create pull request
@@ -28,6 +30,7 @@ jobs:
         title: "[bot] Automated update"
         signoff: false
         committer: Github <noreply@github.com>
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
         body: |
           This is an automated update to longhorn manifests from CI.
 
